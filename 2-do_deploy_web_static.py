@@ -5,7 +5,7 @@ import os.path
 from fabric.api import *
 from fabric.operations import run, put, sudo
 
-env.hosts = ['54.157.144.57', '3.85.148.165']
+env.hosts = ['34.202.164.149', '54.146.58.195']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/alx_server'
 
@@ -28,22 +28,22 @@ def do_deploy(archive_path):
         run("sudo tar -xzf /tmp/{} -C {}".
             format(new_comp, new_folder))
 
-         # delete the archive created from the web server
-         run("sudo rm /tmp/{}".format(new_comp))
+        # delete the archive created from the web server
+        run("sudo rm /tmp/{}".format(new_comp))
 
-         # move contents into host web_static
-         run("sudo mv {}/web_static/* {}/".format(new_folder, new_folder))
+        # move contents into host web_static
+        run("sudo mv {}/web_static/* {}/".format(new_folder, new_folder))
        
-         # remove extra  web_static dir
-         run("sudo rm -rf {}/web_static".format(new_folder))
+        # remove extra  web_static dir
+        run("sudo rm -rf {}/web_static".format(new_folder))
 
-         # Delete the symbolic link /data/web_static/current from the web server
-         run('sudo rm -rf /data/web_static/current')
+        # Delete the symbolic link /data/web_static/current from the web server
+        run('sudo rm -rf /data/web_static/current')
 
-         # Create a new the symbolic link /data/web_static/current on the web server,
-         # linked to the new version of your code (/data/web_static/releases/<archive filename without extension>)
-         run("sudo ln -s {} /data/web_static/current".format(new_folder))
+        # Create a new the symbolic link /data/web_static/current on the web server,
+        # linked to the new version of your code (/data/web_static/releases/<archive filename without extension>)
+        run("sudo ln -s {} /data/web_static/current".format(new_folder))
 
-         return True
+        return True
     except:
         return False
