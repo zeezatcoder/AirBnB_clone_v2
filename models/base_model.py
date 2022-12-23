@@ -3,7 +3,10 @@
 import uuid
 from datetime import datetime
 import sys
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import Column
+from sqlalchemy import DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
